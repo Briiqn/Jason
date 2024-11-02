@@ -1,0 +1,305 @@
+{
+  "assertEquals" : {
+    "type" : "function",
+    "name" : "assertEquals",
+    "return_type" : "void",
+    "parameters" : [ "expected", "actual", "message" ],
+    "parameter_types" : [ "any", "any", "string" ],
+    "body" : [ {
+      "type" : "if",
+      "condition" : {
+        "type" : "operation",
+        "operator" : "!=",
+        "left" : {
+          "type" : "variable",
+          "name" : "expected"
+        },
+        "right" : {
+          "type" : "variable",
+          "name" : "actual"
+        }
+      },
+      "then" : [ {
+        "type" : "call",
+        "name" : "println",
+        "arguments" : [ {
+          "type" : "operation",
+          "operator" : "+",
+          "left" : {
+            "type" : "value",
+            "value" : "❌ Test failed: "
+          },
+          "right" : {
+            "type" : "variable",
+            "name" : "message"
+          }
+        } ]
+      } ],
+      "else" : [ {
+        "type" : "call",
+        "name" : "println",
+        "arguments" : [ {
+          "type" : "operation",
+          "operator" : "+",
+          "left" : {
+            "type" : "value",
+            "value" : "✓ Test passed: "
+          },
+          "right" : {
+            "type" : "variable",
+            "name" : "message"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "fibonacci" : {
+    "type" : "function",
+    "name" : "fibonacci",
+    "return_type" : "int",
+    "parameters" : [ "n" ],
+    "parameter_types" : [ "int" ],
+    "body" : [ {
+      "type" : "if",
+      "condition" : {
+        "type" : "operation",
+        "operator" : "<=",
+        "left" : {
+          "type" : "variable",
+          "name" : "n"
+        },
+        "right" : {
+          "type" : "value",
+          "value" : 1
+        }
+      },
+      "then" : [ {
+        "type" : "return",
+        "value" : {
+          "type" : "variable",
+          "name" : "n"
+        }
+      } ]
+    }, {
+      "type" : "return",
+      "value" : {
+        "type" : "operation",
+        "operator" : "+",
+        "left" : {
+          "type" : "call",
+          "name" : "fibonacci",
+          "arguments" : [ {
+            "type" : "operation",
+            "operator" : "-",
+            "left" : {
+              "type" : "variable",
+              "name" : "n"
+            },
+            "right" : {
+              "type" : "value",
+              "value" : 1
+            }
+          } ]
+        },
+        "right" : {
+          "type" : "call",
+          "name" : "fibonacci",
+          "arguments" : [ {
+            "type" : "operation",
+            "operator" : "-",
+            "left" : {
+              "type" : "variable",
+              "name" : "n"
+            },
+            "right" : {
+              "type" : "value",
+              "value" : 2
+            }
+          } ]
+        }
+      }
+    } ]
+  },
+  "factorial" : {
+    "type" : "function",
+    "name" : "factorial",
+    "return_type" : "int",
+    "parameters" : [ "n" ],
+    "parameter_types" : [ "int" ],
+    "body" : [ {
+      "type" : "variable",
+      "name" : "result",
+      "value" : {
+        "type" : "value",
+        "value" : 1
+      }
+    }, {
+      "type" : "variable",
+      "name" : "i",
+      "value" : {
+        "type" : "value",
+        "value" : 1
+      }
+    }, {
+      "type" : "while_loop",
+      "condition" : {
+        "type" : "operation",
+        "operator" : "<=",
+        "left" : {
+          "type" : "variable",
+          "name" : "i"
+        },
+        "right" : {
+          "type" : "variable",
+          "name" : "n"
+        }
+      },
+      "body" : [ {
+        "type" : "variable",
+        "name" : "result",
+        "value" : {
+          "type" : "operation",
+          "operator" : "*",
+          "left" : {
+            "type" : "variable",
+            "name" : "result"
+          },
+          "right" : {
+            "type" : "variable",
+            "name" : "i"
+          }
+        }
+      }, {
+        "type" : "variable",
+        "name" : "i",
+        "value" : {
+          "type" : "operation",
+          "operator" : "+",
+          "left" : {
+            "type" : "variable",
+            "name" : "i"
+          },
+          "right" : {
+            "type" : "value",
+            "value" : 1
+          }
+        }
+      } ]
+    }, {
+      "type" : "return",
+      "value" : {
+        "type" : "variable",
+        "name" : "result"
+      }
+    } ]
+  },
+  "runAdvancedTests" : {
+    "type" : "function",
+    "name" : "runAdvancedTests",
+    "return_type" : "void",
+    "parameters" : [ ],
+    "parameter_types" : [ ],
+    "body" : [ {
+      "type" : "call",
+      "name" : "println",
+      "arguments" : [ {
+        "type" : "value",
+        "value" : "\n=== Running Advanced Test Suite ===\n"
+      } ]
+    }, {
+      "type" : "call",
+      "name" : "println",
+      "arguments" : [ {
+        "type" : "value",
+        "value" : "Testing Fibonacci function:"
+      } ]
+    }, {
+      "type" : "call",
+      "name" : "println",
+      "arguments" : [ {
+        "type" : "value",
+        "value" : "\nTesting Factorial function:"
+      } ]
+    }, {
+      "type" : "call",
+      "name" : "assertEquals",
+      "arguments" : [ {
+        "type" : "value",
+        "value" : 1
+      }, {
+        "type" : "call",
+        "name" : "factorial",
+        "arguments" : [ {
+          "type" : "value",
+          "value" : 0
+        } ]
+      }, {
+        "type" : "value",
+        "value" : "factorial(0) should be 1"
+      } ]
+    }, {
+      "type" : "call",
+      "name" : "assertEquals",
+      "arguments" : [ {
+        "type" : "value",
+        "value" : 1
+      }, {
+        "type" : "call",
+        "name" : "factorial",
+        "arguments" : [ {
+          "type" : "value",
+          "value" : 1
+        } ]
+      }, {
+        "type" : "value",
+        "value" : "factorial(1) should be 1"
+      } ]
+    }, {
+      "type" : "call",
+      "name" : "assertEquals",
+      "arguments" : [ {
+        "type" : "value",
+        "value" : 120
+      }, {
+        "type" : "call",
+        "name" : "factorial",
+        "arguments" : [ {
+          "type" : "value",
+          "value" : 5
+        } ]
+      }, {
+        "type" : "value",
+        "value" : "factorial(5) should be 120"
+      } ]
+    }, {
+      "type" : "call",
+      "name" : "assertEquals",
+      "arguments" : [ {
+        "type" : "value",
+        "value" : 5040
+      }, {
+        "type" : "call",
+        "name" : "factorial",
+        "arguments" : [ {
+          "type" : "value",
+          "value" : 7
+        } ]
+      }, {
+        "type" : "value",
+        "value" : "factorial(7) should be 5040"
+      } ]
+    }, {
+      "type" : "call",
+      "name" : "println",
+      "arguments" : [ {
+        "type" : "value",
+        "value" : "\n=== Advanced Test Suite Completed ===\n"
+      } ]
+    } ]
+  },
+  "main" : [ {
+    "type" : "call",
+    "name" : "runAdvancedTests",
+    "arguments" : [ ]
+  } ]
+}

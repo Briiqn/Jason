@@ -1,0 +1,466 @@
+{
+  "assertEquals": {
+    "type": "function",
+    "name": "assertEquals",
+    "return_type": "void",
+    "parameters": ["expected", "actual", "message"],
+    "parameter_types": ["any", "any", "string"],
+    "body": [{
+      "type": "if",
+      "condition": {
+        "type": "operation",
+        "operator": "!=",
+        "left": {
+          "type": "variable",
+          "name": "expected"
+        },
+        "right": {
+          "type": "variable",
+          "name": "actual"
+        }
+      },
+      "then": [{
+        "type": "call",
+        "name": "println",
+        "arguments": [{
+          "type": "operation",
+          "operator": "+",
+          "left": {
+            "type": "value",
+            "value": "❌ Test failed: "
+          },
+          "right": {
+            "type": "variable",
+            "name": "message"
+          }
+        }]
+      }],
+      "else": [{
+        "type": "call",
+        "name": "println",
+        "arguments": [{
+          "type": "operation",
+          "operator": "+",
+          "left": {
+            "type": "value",
+            "value": "✓ Test passed: "
+          },
+          "right": {
+            "type": "variable",
+            "name": "message"
+          }
+        }]
+      }]
+    }]
+  },
+  "assertApproximatelyEquals": {
+    "type": "function",
+    "name": "assertApproximatelyEquals",
+    "return_type": "void",
+    "parameters": ["expected", "actual", "message"],
+    "parameter_types": ["float", "float", "string"],
+    "body": [{
+      "type": "variable",
+      "name": "epsilon",
+      "value": {
+        "type": "value",
+        "value": 0.0001
+      }
+    },
+      {
+        "type": "if",
+        "condition": {
+          "type": "operation",
+          "operator": ">",
+          "left": {
+            "type": "call",
+            "name": "abs",
+            "arguments": [{
+              "type": "operation",
+              "operator": "-",
+              "left": {
+                "type": "variable",
+                "name": "expected"
+              },
+              "right": {
+                "type": "variable",
+                "name": "actual"
+              }
+            }]
+          },
+          "right": {
+            "type": "variable",
+            "name": "epsilon"
+          }
+        },
+        "then": [{
+          "type": "call",
+          "name": "println",
+          "arguments": [{
+            "type": "operation",
+            "operator": "+",
+            "left": {
+              "type": "value",
+              "value": "❌ Test failed: "
+            },
+            "right": {
+              "type": "variable",
+              "name": "message"
+            }
+          }]
+        }],
+        "else": [{
+          "type": "call",
+          "name": "println",
+          "arguments": [{
+            "type": "operation",
+            "operator": "+",
+            "left": {
+              "type": "value",
+              "value": "✓ Test passed: "
+            },
+            "right": {
+              "type": "variable",
+              "name": "message"
+            }
+          }]
+        }]
+      }
+    ]
+  },
+  "runMathTests": {
+    "type": "function",
+    "name": "runMathTests",
+    "return_type": "void",
+    "parameters": [],
+    "parameter_types": [],
+    "body": [
+      {
+        "type": "call",
+        "name": "println",
+        "arguments": [{
+          "type": "value",
+          "value": "\n=== Running Math Function Tests ===\n"
+        }]
+      },
+      {
+        "type": "call",
+        "name": "assertEquals",
+        "arguments": [{
+          "type": "value",
+          "value": 5
+        },
+          {
+            "type": "call",
+            "name": "abs",
+            "arguments": [{
+              "type": "value",
+              "value": -5
+            }]
+          },
+          {
+            "type": "value",
+            "value": "abs(-5) should be 5"
+          }
+        ]
+      },
+      {
+        "type": "call",
+        "name": "assertApproximatelyEquals",
+        "arguments": [{
+          "type": "value",
+          "value": 2.0
+        },
+          {
+            "type": "call",
+            "name": "sqrt",
+            "arguments": [{
+              "type": "value",
+              "value": 4.0
+            }]
+          },
+          {
+            "type": "value",
+            "value": "sqrt(4) should be 2"
+          }
+        ]
+      },
+      {
+        "type": "call",
+        "name": "assertApproximatelyEquals",
+        "arguments": [{
+          "type": "value",
+          "value": 0.0
+        },
+          {
+            "type": "call",
+            "name": "sin",
+            "arguments": [{
+              "type": "value",
+              "value": 0.0
+            }]
+          },
+          {
+            "type": "value",
+            "value": "sin(0) should be 0"
+          }
+        ]
+      },
+      {
+        "type": "call",
+        "name": "assertApproximatelyEquals",
+        "arguments": [{
+          "type": "value",
+          "value": 1.0
+        },
+          {
+            "type": "call",
+            "name": "cos",
+            "arguments": [{
+              "type": "value",
+              "value": 0.0
+            }]
+          },
+          {
+            "type": "value",
+            "value": "cos(0) should be 1"
+          }
+        ]
+      },
+      {
+        "type": "call",
+        "name": "assertApproximatelyEquals",
+        "arguments": [{
+          "type": "value",
+          "value": 0.0
+        },
+          {
+            "type": "call",
+            "name": "tan",
+            "arguments": [{
+              "type": "value",
+              "value": 0.0
+            }]
+          },
+          {
+            "type": "value",
+            "value": "tan(0) should be 0"
+          }
+        ]
+      },
+      {
+        "type": "call",
+        "name": "println",
+        "arguments": [{
+          "type": "value",
+          "value": "\n=== Math Tests Completed ===\n"
+        }]
+      }
+    ]
+  },
+  "main": [
+
+    {
+      "type": "call",
+      "name": "println",
+      "arguments": [
+        {
+          "type": "operation",
+          "operator": "+",
+          "left": {
+            "type": "value",
+            "value": "Random: "
+          },
+          "right": {
+            "type": "call",
+            "name": "invoke",
+            "arguments": [
+              {
+                "type": "value",
+                "value": "java.util.Random"
+              },
+              {
+                "type": "value",
+                "value": "nextInt"
+              },
+              {
+                "type": "value",
+                "value": 5
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "call",
+      "name": "runMathTests",
+      "arguments": []
+    },
+    {
+      "type": "variable",
+      "name": "person1",
+      "value": {
+        "type": "new",
+        "class": "Person",
+        "arguments": [
+          {
+            "type": "value",
+            "value": "Alice"
+          },
+          {
+            "type": "value",
+            "value": 25
+          }
+        ]
+      }
+    },
+    {
+      "type": "variable",
+      "name": "person2",
+      "value": {
+        "type": "new",
+        "class": "Person",
+        "arguments": [
+          {
+            "type": "value",
+            "value": "Bob"
+          },
+          {
+            "type": "value",
+            "value": 30
+          }
+        ]
+      }
+    },
+    {
+      "type": "call",
+      "name": "greet",
+      "arguments": [
+      ]
+    },
+    {
+      "type": "call",
+      "name": "println",
+      "arguments": [
+        {
+          "type": "operation",
+          "operator": "+",
+          "left": {
+            "type": "value",
+            "value": "First person's name is: "
+          },
+          "right": {
+            "type": "call",
+            "name": "getName",
+            "arguments": [
+
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "createAndGreetPerson",
+      "parameters": ["name", "age"],
+      "body": [
+        {
+          "type": "variable",
+          "name": "newPerson",
+          "value": {
+            "type": "new",
+            "class": "Person",
+            "arguments": [
+              {
+                "type": "variable",
+                "name": "name"
+              },
+              {
+                "type": "variable",
+                "name": "age"
+              }
+            ]
+          }
+        },
+        {
+          "type": "call",
+          "name": "greet",
+          "arguments": [
+            {
+              "type": "variable",
+              "name": "newPerson"
+            }
+          ]
+        },
+        {
+          "type": "return",
+          "value": {
+            "type": "variable",
+            "name": "newPerson"
+          }
+        }
+      ]
+    },
+    {
+      "type": "variable",
+      "name": "person3",
+      "value": {
+        "type": "call",
+        "name": "createAndGreetPerson",
+        "arguments": [
+          {
+            "type": "value",
+            "value": "Charlie"
+          },
+          {
+            "type": "value",
+            "value": 35
+          }
+        ]
+      }
+    },
+    {
+      "type": "if",
+      "condition": {
+        "type": "operation",
+        "operator": "==",
+        "left": {
+          "type": "call",
+          "name": "getName",
+          "arguments": [
+
+          ]
+        },
+        "right": {
+          "type": "value",
+          "value": "Charlie"
+        }
+      },
+      "then": [
+        {
+          "type": "call",
+          "name": "println",
+          "arguments": [
+            {
+              "type": "value",
+              "value": "Successfully created and verified person3!"
+            }
+          ]
+        }
+      ],
+      "else": [
+        {
+          "type": "call",
+          "name": "println",
+          "arguments": [
+            {
+              "type": "value",
+              "value": "Something went wrong with person3 creation"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

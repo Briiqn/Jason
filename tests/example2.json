@@ -1,0 +1,76 @@
+{
+  "main": [
+    {
+      "type": "new",
+      "class": "Person",
+      "constructor": "withParams",
+      "arguments": [
+        {
+          "type": "value",
+          "value": "John Doe"
+        },
+        {
+          "type": "value",
+          "value": 25
+        }
+      ]
+    },
+    {
+      "type": "variable",
+      "name": "person",
+      "value": {
+        "type": "new",
+        "class": "Person",
+        "constructor": "Person.withParams",
+        "arguments": [
+          {
+            "type": "value",
+            "value": "John Doe"
+          },
+          {
+            "type": "value",
+            "value": 25
+          }
+        ]
+      }
+    },
+    {
+      "type": "call",
+      "name": "println",
+      "arguments": [
+        {
+          "type": "call",
+          "name": "getName",
+          "arguments": []
+        }
+      ]
+    },
+    {
+      "type": "call",
+      "name": "println",
+      "arguments": [
+        {
+          "type": "call",
+          "name": "getAge",
+          "arguments": []
+        }
+      ]
+    },
+    {
+      "type": "call",
+      "name": "greet",
+      "arguments": []
+    },
+    {
+      "type": "call",
+      "name": "println",
+      "arguments": [
+        {
+          "type": "call",
+          "name": "toString",
+          "arguments": []
+        }
+      ]
+    }
+  ]
+}
