@@ -1,4 +1,4 @@
-# JASON ( Just Another JVM Scripting Language)
+# JASON (Just Another JVM Scripting Language)
 
 JASON is a JSON-based scripting language that combines the readability of JSON with the power of programming constructs. It's designed to be simple to understand yet capable of handling complex programming tasks.
 
